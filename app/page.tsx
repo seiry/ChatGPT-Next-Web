@@ -1,5 +1,14 @@
+
 import { Home } from "./components/home";
 
-export default function App() {
-  return <Home />;
+import { getServerSideConfig } from "./config/server";
+
+const serverConfig = getServerSideConfig();
+
+export default async function App() {
+  return (
+    <>
+      <Home />
+    </>
+  );
 }
