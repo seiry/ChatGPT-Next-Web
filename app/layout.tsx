@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   },
 };
 
+// million-ignore
 export default function RootLayout({
   children,
 }: {
