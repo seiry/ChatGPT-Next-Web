@@ -628,6 +628,8 @@ export function MarkdownPreviewer(props: {
   );
 }
 
+// modified by BackTrackZ now it's looks better
+
 export function JsonPreviewer(props: {
   messages: ChatMessage[];
   topic: string;
