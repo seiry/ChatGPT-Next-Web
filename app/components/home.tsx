@@ -24,16 +24,15 @@ import {
   useLocation,
 } from "react-router-dom";
 import { ClientApi } from "../client/api";
-import { useJWTCookieAuthCheck } from "../client/auth";
+import { gotoLogin, useJWTCookieAuthCheck } from "../client/auth";
 import { getClientConfig } from "../config/client";
 import { useAccessStore } from "../store";
 import { useAppConfig } from "../store/config";
 import { AuthPage } from "./auth";
-import { SideBar } from "./sidebar";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
-    <div className={styles["loading-content"] + " no-dark"}>
+    <div className={styles["loading-content"] + " no-dark"} onClick={gotoLogin}>
       {!props.noLogo && <BotIcon />}
       <LoadingIcon />
     </div>
