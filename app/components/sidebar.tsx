@@ -30,6 +30,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { isIOS, useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
 import { showConfirm, showToast } from "./ui-lib";
+import { gotoLogin } from "../client/auth";
 
 const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
   loading: () => null,
@@ -157,7 +158,7 @@ export function SideBar(props: { className?: string }) {
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
           NextChat
         </div>
-        <div className={styles["sidebar-sub-title"]}>
+        <div className={styles["sidebar-sub-title"]} onClick={gotoLogin}>
           Build your own AI assistant.
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
