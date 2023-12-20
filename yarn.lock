@@ -1560,12 +1560,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.22.5
   resolution: "@babel/runtime@npm:7.22.5"
   dependencies:
     regenerator-runtime: "npm:^0.13.11"
   checksum: 994898ec8e3c23d941899444bf4b18c61be9c26a12b0e4649d53d72cb6ecce5af2b9db1f405b2f63abb25633def3f8538fe9d0963ae65cf7d47ca3232032e63d
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.23.2":
+  version: 7.23.6
+  resolution: "@babel/runtime@npm:7.23.6"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 4c4ab16f0361c59fb23956e4d0a29935f1f8a64aa8dd37876ce38355b6f4d8f0e54237aacb89c73b1532def60539ddde2d651523c8fa887b30b19a8cf0c465b0
   languageName: node
   linkType: hard
 
@@ -1705,21 +1714,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hello-pangea/dnd@npm:^16.3.0":
-  version: 16.3.0
-  resolution: "@hello-pangea/dnd@npm:16.3.0"
+"@hello-pangea/dnd@npm:^16.5.0":
+  version: 16.5.0
+  resolution: "@hello-pangea/dnd@npm:16.5.0"
   dependencies:
-    "@babel/runtime": "npm:^7.22.5"
+    "@babel/runtime": "npm:^7.23.2"
     css-box-model: "npm:^1.2.1"
     memoize-one: "npm:^6.0.0"
     raf-schd: "npm:^4.0.3"
-    react-redux: "npm:^8.1.1"
+    react-redux: "npm:^8.1.3"
     redux: "npm:^4.2.1"
     use-memo-one: "npm:^1.1.3"
   peerDependencies:
     react: ^16.8.5 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.5 || ^17.0.0 || ^18.0.0
-  checksum: 7bbdabb26f9b5c02f1ad42dc2db9de55275efe0fd681aba67d6c51fee453b91a17ead4e9f4e1149abc0b14daaa5adf6f575bd0dcb5b8b56928c3c9b6e7bdacca
+  checksum: ebc9014040543c519f626e545ee8a27781a34bc2fc38681941a146bfbb456a1381492e68cc4cb53a70a59e32bee6ffd6a070c382afc3a0fab3ef863e018826ab
   languageName: node
   linkType: hard
 
@@ -2170,90 +2179,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-darwin-arm64@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-darwin-arm64@npm:1.4.0"
+"@tauri-apps/cli-darwin-arm64@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-darwin-arm64@npm:1.5.8"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-darwin-x64@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-darwin-x64@npm:1.4.0"
+"@tauri-apps/cli-darwin-x64@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-darwin-x64@npm:1.5.8"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-arm-gnueabihf@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-linux-arm-gnueabihf@npm:1.4.0"
+"@tauri-apps/cli-linux-arm-gnueabihf@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-linux-arm-gnueabihf@npm:1.5.8"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-arm64-gnu@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-linux-arm64-gnu@npm:1.4.0"
+"@tauri-apps/cli-linux-arm64-gnu@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-linux-arm64-gnu@npm:1.5.8"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-arm64-musl@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-linux-arm64-musl@npm:1.4.0"
+"@tauri-apps/cli-linux-arm64-musl@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-linux-arm64-musl@npm:1.5.8"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-x64-gnu@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-linux-x64-gnu@npm:1.4.0"
+"@tauri-apps/cli-linux-x64-gnu@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-linux-x64-gnu@npm:1.5.8"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-x64-musl@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-linux-x64-musl@npm:1.4.0"
+"@tauri-apps/cli-linux-x64-musl@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-linux-x64-musl@npm:1.5.8"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-win32-arm64-msvc@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-win32-arm64-msvc@npm:1.4.0"
+"@tauri-apps/cli-win32-arm64-msvc@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-win32-arm64-msvc@npm:1.5.8"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-win32-ia32-msvc@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-win32-ia32-msvc@npm:1.4.0"
+"@tauri-apps/cli-win32-ia32-msvc@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-win32-ia32-msvc@npm:1.5.8"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-win32-x64-msvc@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli-win32-x64-msvc@npm:1.4.0"
+"@tauri-apps/cli-win32-x64-msvc@npm:1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli-win32-x64-msvc@npm:1.5.8"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "@tauri-apps/cli@npm:1.4.0"
+"@tauri-apps/cli@npm:^1.5.8":
+  version: 1.5.8
+  resolution: "@tauri-apps/cli@npm:1.5.8"
   dependencies:
-    "@tauri-apps/cli-darwin-arm64": "npm:1.4.0"
-    "@tauri-apps/cli-darwin-x64": "npm:1.4.0"
-    "@tauri-apps/cli-linux-arm-gnueabihf": "npm:1.4.0"
-    "@tauri-apps/cli-linux-arm64-gnu": "npm:1.4.0"
-    "@tauri-apps/cli-linux-arm64-musl": "npm:1.4.0"
-    "@tauri-apps/cli-linux-x64-gnu": "npm:1.4.0"
-    "@tauri-apps/cli-linux-x64-musl": "npm:1.4.0"
-    "@tauri-apps/cli-win32-arm64-msvc": "npm:1.4.0"
-    "@tauri-apps/cli-win32-ia32-msvc": "npm:1.4.0"
-    "@tauri-apps/cli-win32-x64-msvc": "npm:1.4.0"
+    "@tauri-apps/cli-darwin-arm64": "npm:1.5.8"
+    "@tauri-apps/cli-darwin-x64": "npm:1.5.8"
+    "@tauri-apps/cli-linux-arm-gnueabihf": "npm:1.5.8"
+    "@tauri-apps/cli-linux-arm64-gnu": "npm:1.5.8"
+    "@tauri-apps/cli-linux-arm64-musl": "npm:1.5.8"
+    "@tauri-apps/cli-linux-x64-gnu": "npm:1.5.8"
+    "@tauri-apps/cli-linux-x64-musl": "npm:1.5.8"
+    "@tauri-apps/cli-win32-arm64-msvc": "npm:1.5.8"
+    "@tauri-apps/cli-win32-ia32-msvc": "npm:1.5.8"
+    "@tauri-apps/cli-win32-x64-msvc": "npm:1.5.8"
   dependenciesMeta:
     "@tauri-apps/cli-darwin-arm64":
       optional: true
@@ -2277,7 +2286,7 @@ __metadata:
       optional: true
   bin:
     tauri: tauri.js
-  checksum: b653a038e4c1ea1370595bd878b9b7a966da133efe5f82be50c929ec710c26769025dc96b0e43eb0664d0491b6099f1a2820d10441105ec1d97c4ca745a02ba3
+  checksum: 41e2428eaec357fce91c8e6b0c432e297dab450b732f9f36ee7b9922784a43eb7c7ca483d2a77ab2bb7dbb07ed7342d10715bb15a2628d0bd802d6fd7026721d
   languageName: node
   linkType: hard
 
@@ -3246,9 +3255,9 @@ __metadata:
   resolution: "chatgpt-next-web@workspace:."
   dependencies:
     "@fortaine/fetch-event-source": "npm:^3.0.6"
-    "@hello-pangea/dnd": "npm:^16.3.0"
+    "@hello-pangea/dnd": "npm:^16.5.0"
     "@svgr/webpack": "npm:^6.5.1"
-    "@tauri-apps/cli": "npm:^1.4.0"
+    "@tauri-apps/cli": "npm:^1.5.8"
     "@types/cookie": "npm:^0.5.1"
     "@types/node": "npm:^20.9.0"
     "@types/react": "npm:^18.2.21"
@@ -3263,7 +3272,7 @@ __metadata:
     eslint-config-next: "npm:13.4.19"
     eslint-config-prettier: "npm:^8.8.0"
     eslint-plugin-prettier: "npm:^5.0.0"
-    fuse.js: "npm:^6.6.2"
+    fuse.js: "npm:^7.0.0"
     html-to-image: "npm:^1.11.11"
     husky: "npm:^8.0.0"
     jose: "npm:^4.14.4"
@@ -4892,10 +4901,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^6.6.2":
-  version: 6.6.2
-  resolution: "fuse.js@npm:6.6.2"
-  checksum: 4768725963ee07dacfcb4abb001a12ea5e6e44c95d4e0918fcbfe0469107c5ad3ece2f1930396eb6c210383edf4c14ca083b91a2fc54950c5d021935a63d89de
+"fuse.js@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "fuse.js@npm:7.0.0"
+  checksum: d75d35f2d61afa85b8248f9cbfc7d4df29ae47ea574a15ad5c3c2a41930c5ed78668346295508b59ec4929fcb1a5cd6d9a8c649b5a3bc8b18e515f4e4cb9809d
   languageName: node
   linkType: hard
 
@@ -7383,9 +7392,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^8.1.1":
-  version: 8.1.1
-  resolution: "react-redux@npm:8.1.1"
+"react-redux@npm:^8.1.3":
+  version: 8.1.3
+  resolution: "react-redux@npm:8.1.3"
   dependencies:
     "@babel/runtime": "npm:^7.12.1"
     "@types/hoist-non-react-statics": "npm:^3.3.1"
@@ -7411,7 +7420,7 @@ __metadata:
       optional: true
     redux:
       optional: true
-  checksum: 2998af1870dadc1a5c39566712481cc087af259198c419840b6b966d311ba23bb95b31441440ff4c61ac710024914ebb9c71fbd4290e6fa25d255e6f20ae737a
+  checksum: c4c7586cff3abeb784e73598d330f5301116a4e9942fd36895f2bccd8990001709c6c3ea1817edb75ee477470d6c67c9113e05a7f86b2b68a3950c9c29fe20cb
   languageName: node
   linkType: hard
 
@@ -7486,6 +7495,13 @@ __metadata:
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: d493e9e118abef5b099c78170834f18540c4933cedf9bfabc32d3af94abfb59a7907bd7950259cbab0a929ebca7db77301e8024e5121e6482a82f78283dfd20c
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 5db3161abb311eef8c45bcf6565f4f378f785900ed3945acf740a9888c792f75b98ecb77f0775f3bf95502ff423529d23e94f41d80c8256e8fa05ed4b07cf471
   languageName: node
   linkType: hard
 
