@@ -12,7 +12,7 @@ import LoadingIcon from "../icons/three-dots.svg";
 import { getCSSVar, useMobileScreen } from "../utils";
 
 import dynamic from "next/dynamic";
-import { Path, SlotID } from "../constant";
+import { ModelProvider, Path, SlotID } from "../constant";
 import { ErrorBoundary } from "./error";
 
 import { getISOLang, getLang } from "../locales";
@@ -23,8 +23,8 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { api } from "../client/api";
-import { gotoLogin, useJWTCookieAuthCheck } from "../client/auth";
+import { ClientApi } from "../client/api";
+import { useJWTCookieAuthCheck } from "../client/auth";
 import { getClientConfig } from "../config/client";
 import { useAccessStore } from "../store";
 import { useAppConfig } from "../store/config";
@@ -130,7 +130,8 @@ function Screen() {
   const isHome = location.pathname === Path.Home;
   const isAuth = location.pathname === Path.Auth;
   const isMobileScreen = useMobileScreen();
-  const shouldTightBorder = getClientConfig()?.isApp || (config.tightBorder && !isMobileScreen);
+  const shouldTightBorder =
+    getClientConfig()?.isApp || (config.tightBorder && !isMobileScreen);
 
   useEffect(() => {
     loadAsyncGoogleFont();
@@ -171,6 +172,12 @@ function Screen() {
 export function useLoadData() {
   const config = useAppConfig();
 
+  var api: ClientApi;
+  if (config.modelConfig.model === "gemini-pro") {
+    api = new ClientApi(ModelProvider.GeminiPro);
+  } else {
+    api = new ClientApi(ModelProvider.GPT);
+  }
   useEffect(() => {
     (async () => {
       const models = await api.llm.models();
