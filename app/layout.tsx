@@ -4,9 +4,6 @@ import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getClientConfig } from "./config/client";
 import { type Metadata } from "next";
-import { getServerSideConfig } from "./config/server";
-
-const serverConfig = getServerSideConfig();
 
 export const metadata: Metadata = {
   title: "NextChat",
