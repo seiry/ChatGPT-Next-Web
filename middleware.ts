@@ -14,6 +14,7 @@ export async function middleware(request: NextRequest) {
 
   if (process.env.NODE_ENV === "development") {
     NextResponse.next();
+    return 
     token = {
       value: process.env.DEBUG_JWT!,
       name: "",
@@ -28,6 +29,7 @@ export async function middleware(request: NextRequest) {
       },
     });
   }
+
   try {
     const result = await jwtVerify(token.value, JWKS);
     console.log(result);

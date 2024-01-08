@@ -13,6 +13,9 @@ const DANGER_CONFIG = {
   hideBalanceQuery: serverConfig.hideBalanceQuery,
   disableFastLink: serverConfig.disableFastLink,
   customModels: serverConfig.customModels,
+  openaiApiKey: process.env.NEXT_PUBLIC_OVERRIDE_OPENAI_FULL_PATH
+    ? process.env.OPENAI_API_KEY
+    : undefined,
 };
 
 declare global {
