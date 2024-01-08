@@ -11,7 +11,9 @@ CUSTOM_MODELS=-all,+gpt-3.5-turbo,+gpt-4
 
 when `NEXT_PUBLIC_OVERRIDE_OPENAI_FULL_PATH` is set, this fork will pass openai(github copilot) key **directly** to frontend, via `/api/config`, to override local openapi key.
 
-so, you may **always** use cloudflare zerotrust to protect the app.
+In this mode, `BASE_URL` is not used actually.
+
+So, you may **ALWAYS** use cloudflare zerotrust to protect the app.
 
 ![zerotrust](docs/images/cf.png)
 
