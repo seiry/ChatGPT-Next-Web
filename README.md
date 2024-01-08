@@ -2,6 +2,8 @@
 
 https://github.com/aaamoon/copilot-gpt4-service
 
+https://github.com/wpv-chan/cf-copilot-service
+
 ```bash
 # set OVERRIDE pass to use cf worker directly, instead of proxy.
 NEXT_PUBLIC_OVERRIDE_OPENAI_FULL_PATH=https://<youcfworker>.workers.dev/
@@ -16,6 +18,8 @@ In this mode, `BASE_URL` is not used actually.
 So, you may **ALWAYS** use cloudflare zerotrust to protect the app.
 
 ![zerotrust](docs/images/cf.png)
+
+You could also protect you worker via zerotrust, but it's not necessary actually. For if other bad bad boys use your worker, you can view there github key in the kv.
 
 <div align="center">
 
