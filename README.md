@@ -1,5 +1,21 @@
+## for copilot api
+
+https://github.com/aaamoon/copilot-gpt4-service
+
+```bash
+# set OVERRIDE pass to use cf worker directly, instead of proxy.
+NEXT_PUBLIC_OVERRIDE_OPENAI_FULL_PATH=https://<youcfworker>.workers.dev/
+# only these 2 models are supported.
+CUSTOM_MODELS=-all,+gpt-3.5-turbo,+gpt-4
+```
+
+when `NEXT_PUBLIC_OVERRIDE_OPENAI_FULL_PATH` is set, this fork will pass openai(github copilot) key **directly** to frontend, via `/api/config`, to override local openapi key.
+
+so, you may **always** use cloudflare zerotrust to protect the app.
+
+![zerotrust](docs/images/cf.png)
+
 <div align="center">
-<img src="./docs/images/head-cover.png" alt="icon"/>
 
 <h1 align="center">NextChat (ChatGPT Next Web)</h1>
 
