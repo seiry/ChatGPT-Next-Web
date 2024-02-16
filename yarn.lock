@@ -1923,6 +1923,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/third-parties@npm:^14.1.0":
+  version: 14.1.0
+  resolution: "@next/third-parties@npm:14.1.0"
+  dependencies:
+    third-party-capital: "npm:1.0.20"
+  peerDependencies:
+    next: ^13.0.0 || ^14.0.0
+    react: ^18.2.0
+  checksum: 5c65829d901cad5ed56432632f374c14e3dbae233553733fc962d63d055fd271a3bdb0209c1c0196887392c6f9625d24d74ee5c7a9fe0a70dc25be4659b46ca5
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -3337,57 +3349,6 @@ __metadata:
   checksum: c8dd1f4bf1a92fccf7d2fad9673660a88b37854557d30f6076c32fedfb92d1420208298829ff1d3b6b4fa1c7012e8326c45e7f5c3ed1e9a09ec177593c521b2f
   languageName: node
   linkType: hard
-
-"chatgpt-next-web@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "chatgpt-next-web@workspace:."
-  dependencies:
-    "@fortaine/fetch-event-source": "npm:^3.0.6"
-    "@hello-pangea/dnd": "npm:^16.5.0"
-    "@svgr/webpack": "npm:^6.5.1"
-    "@tauri-apps/cli": "npm:^1.4.0"
-    "@types/cookie": "npm:^0.5.1"
-    "@types/node": "npm:^20.9.0"
-    "@types/react": "npm:^18.2.21"
-    "@types/react-dom": "npm:^18.2.7"
-    "@types/react-katex": "npm:^3.0.0"
-    "@types/spark-md5": "npm:^3.0.4"
-    "@vercel/analytics": "npm:^0.1.11"
-    cookie: "npm:^0.5.0"
-    cross-env: "npm:^7.0.3"
-    emoji-picker-react: "npm:^4.5.15"
-    eslint: "npm:^8.56.0"
-    eslint-config-next: "npm:13.5.6"
-    eslint-config-prettier: "npm:^8.10.0"
-    eslint-plugin-prettier: "npm:^5.1.2"
-    fuse.js: "npm:^6.6.2"
-    html-to-image: "npm:^1.11.11"
-    husky: "npm:^8.0.0"
-    jose: "npm:^4.15.4"
-    lint-staged: "npm:^13.2.2"
-    mermaid: "npm:^10.6.1"
-    million: "npm:^2.6.4"
-    nanoid: "npm:^5.0.4"
-    next: "npm:^13.5.6"
-    node-fetch: "npm:^3.3.2"
-    prettier: "npm:^3.1.1"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-markdown: "npm:^8.0.7"
-    react-router-dom: "npm:^6.15.0"
-    rehype-highlight: "npm:^6.0.0"
-    rehype-katex: "npm:^6.0.3"
-    remark-breaks: "npm:^3.0.3"
-    remark-gfm: "npm:^3.0.1"
-    remark-math: "npm:^5.1.1"
-    sass: "npm:^1.66.1"
-    spark-md5: "npm:^3.0.2"
-    typescript: "npm:5.3.3"
-    use-debounce: "npm:^9.0.4"
-    webpack: "npm:^5.89.0"
-    zustand: "npm:^4.4.7"
-  languageName: unknown
-  linkType: soft
 
 "chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.5.3":
   version: 3.5.3
@@ -7217,6 +7178,58 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nextchat@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "nextchat@workspace:."
+  dependencies:
+    "@fortaine/fetch-event-source": "npm:^3.0.6"
+    "@hello-pangea/dnd": "npm:^16.5.0"
+    "@next/third-parties": "npm:^14.1.0"
+    "@svgr/webpack": "npm:^6.5.1"
+    "@tauri-apps/cli": "npm:^1.4.0"
+    "@types/cookie": "npm:^0.5.1"
+    "@types/node": "npm:^20.9.0"
+    "@types/react": "npm:^18.2.21"
+    "@types/react-dom": "npm:^18.2.7"
+    "@types/react-katex": "npm:^3.0.0"
+    "@types/spark-md5": "npm:^3.0.4"
+    "@vercel/analytics": "npm:^0.1.11"
+    cookie: "npm:^0.5.0"
+    cross-env: "npm:^7.0.3"
+    emoji-picker-react: "npm:^4.5.15"
+    eslint: "npm:^8.56.0"
+    eslint-config-next: "npm:13.5.6"
+    eslint-config-prettier: "npm:^8.10.0"
+    eslint-plugin-prettier: "npm:^5.1.2"
+    fuse.js: "npm:^6.6.2"
+    html-to-image: "npm:^1.11.11"
+    husky: "npm:^8.0.0"
+    jose: "npm:^4.15.4"
+    lint-staged: "npm:^13.2.2"
+    mermaid: "npm:^10.6.1"
+    million: "npm:^2.6.4"
+    nanoid: "npm:^5.0.4"
+    next: "npm:^13.5.6"
+    node-fetch: "npm:^3.3.2"
+    prettier: "npm:^3.1.1"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-markdown: "npm:^8.0.7"
+    react-router-dom: "npm:^6.15.0"
+    rehype-highlight: "npm:^6.0.0"
+    rehype-katex: "npm:^6.0.3"
+    remark-breaks: "npm:^3.0.3"
+    remark-gfm: "npm:^3.0.1"
+    remark-math: "npm:^5.1.1"
+    sass: "npm:^1.66.1"
+    spark-md5: "npm:^3.0.2"
+    typescript: "npm:5.3.3"
+    use-debounce: "npm:^9.0.4"
+    webpack: "npm:^5.89.0"
+    zustand: "npm:^4.4.7"
+  languageName: unknown
+  linkType: soft
+
 "node-domexception@npm:^1.0.0":
   version: 1.0.0
   resolution: "node-domexception@npm:1.0.0"
@@ -8749,6 +8762,13 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: 4383b5baaeffa9bb4cda2ac33a4aa2e6d1f8aaf811848bf73513a9b88fd76372dc461f6fd6d2e9cb5100f48b473be32c6f95bd983509b7d92bb4d92c10747452
+  languageName: node
+  linkType: hard
+
+"third-party-capital@npm:1.0.20":
+  version: 1.0.20
+  resolution: "third-party-capital@npm:1.0.20"
+  checksum: 40e2531b428a21f05531fc62ef82859c0071211eff09588baf75d4b525096bbdb4f93e17e2d538849db8d4fc3cceb074933d7be59fddc26f86718fbbe852a97f
   languageName: node
   linkType: hard
 
