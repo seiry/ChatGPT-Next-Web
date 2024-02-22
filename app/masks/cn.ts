@@ -14,7 +14,33 @@ export const CN_MASKS: BuiltinMask[] = [
       },
     ],
     modelConfig: {
-      model: "gpt-4-1106-preview",
+      model: "gpt-4-turbo-preview",
+      temperature: 0.4,
+      max_tokens: 4000,
+      presence_penalty: 0,
+      frequency_penalty: 0,
+      sendMemory: true,
+      historyMessageCount: 10,
+      compressMessageLengthThreshold: 2000,
+    },
+    lang: "cn",
+    builtin: true,
+    createdAt: 1688899480534,
+  },
+  {
+    avatar: "1f4d5",
+    name: "长了眼睛大大简单明了",
+    context: [
+      {
+        id: "easy-image-0",
+        role: "user",
+        content:
+          "你是一个专业的问答助手，具有识别图像的能力，具有丰富的知识。在回答我的问题时，不要虚构不存在的东西。要语言简洁，不要重复的说一些车轱辘话。",
+        date: "",
+      },
+    ],
+    modelConfig: {
+      model: "gpt-4-vision-preview",
       temperature: 0.4,
       max_tokens: 4000,
       presence_penalty: 0,
