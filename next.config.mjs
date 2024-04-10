@@ -1,6 +1,7 @@
+import million from "million/compiler";
 import webpack from "webpack";
-import million from 'million/compiler';
 
+const BUILD_TIME = new Date().toISOString();
 const mode = process.env.BUILD_MODE ?? "standalone";
 console.log("[Next] build mode", mode);
 
@@ -35,7 +36,6 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   reactStrictMode: true,
-
 };
 
 const CorsHeaders = [
@@ -57,7 +57,7 @@ const CorsHeaders = [
 
 const millionConfig = {
   auto: { rsc: true },
-}
+};
 
 if (mode !== "export") {
   nextConfig.headers = async () => {
@@ -65,6 +65,12 @@ if (mode !== "export") {
       {
         source: "/api/:path*",
         headers: CorsHeaders,
+      },
+      {
+        source: "/",
+        headers: {
+          build: BUILD_TIME,
+        },
       },
     ];
   };
