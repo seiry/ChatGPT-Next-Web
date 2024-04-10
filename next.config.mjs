@@ -67,7 +67,7 @@ if (mode !== "export") {
         headers: CorsHeaders,
       },
       {
-        source: "/",
+        source: "/:path*",
         headers: {
           build: BUILD_TIME,
         },
