@@ -25,6 +25,7 @@
     "cookie": "^0.6.0",
     "emoji-picker-react": "^4.9.2",
     "fuse.js": "^7.0.0",
+    "heic2any": "^0.0.4",
     "html-to-image": "^1.11.11",
     "jose": "^5.2.4",
     "mermaid": "^10.6.1",
