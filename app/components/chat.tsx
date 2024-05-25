@@ -1199,6 +1199,7 @@ function OriginChat() {
               });
           }
         };
+        document.body.appendChild(fileInput);
         fileInput.click();
       })),
     );
