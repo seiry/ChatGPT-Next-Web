@@ -1163,22 +1163,18 @@ function OriginChat() {
 
   async function uploadImage() {
     const images: string[] = [];
-    console.log({ attachImages });
     images.push(...attachImages);
 
     const fileInput = document.createElement("input");
     fileInput.style.display = "none";
-    
+
     const newImages = await new Promise<string[]>((res, rej) => {
       fileInput.type = "file";
       fileInput.accept =
         "image/png, image/jpeg, image/webp, image/heic, image/heif";
       fileInput.multiple = true;
-      fileInput.oninput = (event: any) => {
-        console.log({ event }, "oninput");
-      };
+
       fileInput.onchange = (event: any) => {
-        console.log({ event }, "onchange");
         setUploading(true);
         const files = event.target.files;
         const imagesData: string[] = [];
@@ -1196,7 +1192,6 @@ function OriginChat() {
               }
             })
             .catch((e) => {
-              console.error(e);
               setUploading(false);
               rej(e);
             });
