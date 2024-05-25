@@ -1171,6 +1171,9 @@ function OriginChat() {
         fileInput.accept =
           "image/png, image/jpeg, image/webp, image/heic, image/heif";
         fileInput.multiple = true;
+        fileInput.oninput = (event: any) => { 
+          console.log({event},'oninput')
+        }
         fileInput.onchange = (event: any) => {
           console.log({event},'onchange')
           setUploading(true);
