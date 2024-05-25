@@ -2711,33 +2711,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/speed-insights@npm:^1.0.2":
-  version: 1.0.10
-  resolution: "@vercel/speed-insights@npm:1.0.10"
-  peerDependencies:
-    "@sveltejs/kit": ^1 || ^2
-    next: ">= 13"
-    react: ^18 || ^19
-    svelte: ^4
-    vue: ^3
-    vue-router: ^4
-  peerDependenciesMeta:
-    "@sveltejs/kit":
-      optional: true
-    next:
-      optional: true
-    react:
-      optional: true
-    svelte:
-      optional: true
-    vue:
-      optional: true
-    vue-router:
-      optional: true
-  checksum: 10/5ceaad884a37c539e19f70da383f46d4e937dbd6fbad3c0d27b2c5748ca60649ce2259d24788d8564fba051926c444bbbe6e8549e303d75eb9cfb6edc2dedbde
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/ast@npm:1.11.6, @webassemblyjs/ast@npm:^1.11.5":
   version: 1.11.6
   resolution: "@webassemblyjs/ast@npm:1.11.6"
@@ -7633,7 +7606,6 @@ __metadata:
     "@types/react-katex": "npm:^3.0.0"
     "@types/spark-md5": "npm:^3.0.4"
     "@vercel/analytics": "npm:^0.1.11"
-    "@vercel/speed-insights": "npm:^1.0.2"
     cookie: "npm:^0.6.0"
     cross-env: "npm:^7.0.3"
     emoji-picker-react: "npm:^4.9.2"
