@@ -1167,6 +1167,8 @@ function OriginChat() {
     images.push(...attachImages);
 
     const fileInput = document.createElement("input");
+    fileInput.style.display = "none";
+    
     const newImages = await new Promise<string[]>((res, rej) => {
       fileInput.type = "file";
       fileInput.accept =
