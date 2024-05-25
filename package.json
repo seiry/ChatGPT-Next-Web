@@ -68,5 +68,12 @@
   "resolutions": {
     "lint-staged/yaml": "^2.2.2"
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.2.2",
+  "browserslist": [
+    "defaults",
+    "iOS > 15.3",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "not dead"
+  ]
 }
