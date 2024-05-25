@@ -1121,8 +1121,10 @@ function OriginChat() {
   const handlePaste = useCallback(
     async (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
       const currentModel = chatStore.currentSession().mask.modelConfig.model;
-      if(!isVisionModel(currentModel)){return;}
-      const items = (event.clipboardData).items;
+      if (!isVisionModel(currentModel)) {
+        return;
+      }
+      const items = event.clipboardData.items;
       for (const item of items) {
         if (item.kind === "file" && item.type.startsWith("image/")) {
           event.preventDefault();
@@ -1161,48 +1163,50 @@ function OriginChat() {
 
   async function uploadImage() {
     const images: string[] = [];
-    console.log({attachImages})
+    console.log({ attachImages });
     images.push(...attachImages);
 
-    images.push(
-      ...(await new Promise<string[]>((res, rej) => {
-        const fileInput = document.createElement("input");
-        fileInput.type = "file";
-        fileInput.accept =
-          "image/png, image/jpeg, image/webp, image/heic, image/heif";
-        fileInput.multiple = true;
-        fileInput.oninput = (event: any) => { 
-          console.log({event},'oninput')
-        }
-        fileInput.onchange = (event: any) => {
-          console.log({event},'onchange')
-          setUploading(true);
-          const files = event.target.files;
-          const imagesData: string[] = [];
-          for (let i = 0; i < files.length; i++) {
-            const file = event.target.files[i];
-            compressImage(file, 256 * 1024)
-              .then((dataUrl) => {
-                imagesData.push(dataUrl);
-                if (
-                  imagesData.length === 3 ||
-                  imagesData.length === files.length
-                ) {
-                  setUploading(false);
-                  res(imagesData);
-                }
-              })
-              .catch((e) => {
-                console.error(e);
+    const fileInput = document.createElement("input");
+    const newImages = await new Promise<string[]>((res, rej) => {
+      fileInput.type = "file";
+      fileInput.accept =
+        "image/png, image/jpeg, image/webp, image/heic, image/heif";
+      fileInput.multiple = true;
+      fileInput.oninput = (event: any) => {
+        console.log({ event }, "oninput");
+      };
+      fileInput.onchange = (event: any) => {
+        console.log({ event }, "onchange");
+        setUploading(true);
+        const files = event.target.files;
+        const imagesData: string[] = [];
+        for (let i = 0; i < files.length; i++) {
+          const file = event.target.files[i];
+          compressImage(file, 256 * 1024)
+            .then((dataUrl) => {
+              imagesData.push(dataUrl);
+              if (
+                imagesData.length === 3 ||
+                imagesData.length === files.length
+              ) {
                 setUploading(false);
-                rej(e);
-              });
-          }
-        };
-        document.body.appendChild(fileInput);
-        fileInput.click();
-      })),
-    );
+                res(imagesData);
+              }
+            })
+            .catch((e) => {
+              console.error(e);
+              setUploading(false);
+              rej(e);
+            });
+        }
+      };
+      document.body.appendChild(fileInput);
+      fileInput.click();
+    });
+    
+    document.body.removeChild(fileInput);
+
+    images.push(...newImages);
 
     const imagesLength = images.length;
     if (imagesLength > 3) {
