@@ -1167,13 +1167,12 @@ function OriginChat() {
 
     const fileInput = document.createElement("input");
     fileInput.style.display = "none";
+    fileInput.type = "file";
+    fileInput.accept =
+      "image/png, image/jpeg, image/webp, image/heic, image/heif";
+    fileInput.multiple = true;
 
     const newImages = await new Promise<string[]>((res, rej) => {
-      fileInput.type = "file";
-      fileInput.accept =
-        "image/png, image/jpeg, image/webp, image/heic, image/heif";
-      fileInput.multiple = true;
-
       fileInput.onchange = (event: any) => {
         setUploading(true);
         const files = event.target.files;
@@ -1197,6 +1196,9 @@ function OriginChat() {
             });
         }
       };
+      
+      // https://stackoverflow.com/questions/47664777/javascript-file-input-onchange-not-working-ios-safari-only
+      // fix for ios safari
       document.body.appendChild(fileInput);
       fileInput.click();
     });
