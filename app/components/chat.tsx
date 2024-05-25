@@ -1161,6 +1161,7 @@ function OriginChat() {
 
   async function uploadImage() {
     const images: string[] = [];
+    console.log({attachImages})
     images.push(...attachImages);
 
     images.push(
@@ -1171,6 +1172,7 @@ function OriginChat() {
           "image/png, image/jpeg, image/webp, image/heic, image/heif";
         fileInput.multiple = true;
         fileInput.onchange = (event: any) => {
+          console.log({event},'onchange')
           setUploading(true);
           const files = event.target.files;
           const imagesData: string[] = [];
@@ -1188,6 +1190,7 @@ function OriginChat() {
                 }
               })
               .catch((e) => {
+                console.error(e);
                 setUploading(false);
                 rej(e);
               });
