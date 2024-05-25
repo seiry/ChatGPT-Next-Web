@@ -71,7 +71,6 @@
   "packageManager": "yarn@4.2.2",
   "browserslist": [
     "defaults",
-    "iOS > 15.3",
-    "node 20"
+    "iOS > 15.3"
   ]
 }
