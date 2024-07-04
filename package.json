@@ -2,14 +2,16 @@
   "name": "nextchat",
   "license": "mit",
   "scripts": {
-    "dev": "next dev",
-    "build": "cross-env BUILD_MODE=standalone next build",
+    "mask": "npx tsx app/masks/build.ts",
+    "mask:watch": "npx watch 'yarn mask' app/masks",
+    "dev": "yarn run mask:watch & next dev",
+    "build": "yarn mask && cross-env BUILD_MODE=standalone next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "cross-env BUILD_MODE=export BUILD_APP=1 next build",
-    "export:dev": "cross-env BUILD_MODE=export BUILD_APP=1 next dev",
-    "app:dev": "yarn tauri dev",
-    "app:build": "yarn tauri build",
+    "export": "yarn mask && cross-env BUILD_MODE=export BUILD_APP=1 next build",
+    "export:dev": "yarn mask:watch & cross-env BUILD_MODE=export BUILD_APP=1 next dev",
+    "app:dev": "yarn mask:watch & yarn tauri dev",
+    "app:build": "yarn mask && yarn tauri build",
     "prompts": "node ./scripts/fetch-prompts.mjs",
     "prepare": "husky install",
     "proxy-dev": "sh ./scripts/init-proxy.sh && proxychains -f ./scripts/proxychains.conf yarn dev"
@@ -60,9 +62,11 @@
     "eslint-plugin-prettier": "^5.1.3",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
-    "prettier": "^3.2.5",
-    "typescript": "5.4.2",
-    "webpack": "^5.89.0"
+    "prettier": "^3.0.2",
+    "tsx": "^4.16.0",
+    "typescript": "5.2.2",
+    "watch": "^1.0.2",
+    "webpack": "^5.88.1"
   },
   "resolutions": {
     "lint-staged/yaml": "^2.2.2"
