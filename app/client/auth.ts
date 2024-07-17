@@ -10,5 +10,5 @@ export const useJWTCookieAuthCheck = () => {
 };
 
 export const gotoLogin = () => {
-  location.href = "/api/config";
+  location.href = "/api/login";
 };

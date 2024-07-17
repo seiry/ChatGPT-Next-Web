@@ -32,7 +32,6 @@ export async function middleware(request: NextRequest) {
 
   try {
     const result = await jwtVerify(token.value, JWKS);
-    console.log(result);
   } catch (error) {
     console.error(error);
 
