@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
-function handle() {
-  return NextResponse.redirect('/');
+function handle(request: NextRequest) {
+  const url = new URL(request.url)
+  const origin = url.origin
+  return NextResponse.redirect(origin);
 }
 
 export const GET = handle;
