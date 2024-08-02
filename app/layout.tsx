@@ -5,15 +5,6 @@ import "./styles/globals.scss";
 import "./styles/highlight.scss";
 import "./styles/markdown.scss";
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#151515" },
-  ],
-};
 
 export const metadata: Metadata = {
   title: "NextChat",
@@ -25,6 +16,16 @@ export const metadata: Metadata = {
 };
 
 // million-ignore
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#151515" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
