@@ -52,3 +52,4 @@ dev
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+masks.json
