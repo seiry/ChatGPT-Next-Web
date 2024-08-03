@@ -7,7 +7,7 @@ if ('serviceWorker' in navigator) {
         sw.onstatechange = function() {
           if (sw.state === 'installed') {
             // SW installed.  Reload for SW intercept serving SW-enabled page.
-            console.log('ServiceWorker installed reload page');
+            alert('ServiceWorker installed reload page');
             window.location.reload();
           }
         }
@@ -20,7 +20,7 @@ if ('serviceWorker' in navigator) {
       console.error('ServiceWorker registration failed: ', err);
     });
     navigator.serviceWorker.addEventListener('controllerchange', function() {
-      console.log('ServiceWorker controllerchange ');
+      alert('ServiceWorker controllerchange ');
       window.location.reload(true);
     });
   });
