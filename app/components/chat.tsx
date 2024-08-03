@@ -732,6 +732,7 @@ function OriginChat() {
   const session = chatStore.currentSession();
   const config = useAppConfig();
   const fontSize = config.fontSize;
+  const fontFamily = config.fontFamily;
 
   const [showExport, setShowExport] = useState(false);
 
@@ -811,7 +812,7 @@ function OriginChat() {
     // clear search results
     if (n === 0) {
       setPromptHints([]);
-    } else if (text.startsWith(ChatCommandPrefix)) {
+    } else if (text.match(ChatCommandPrefix)) {
       setPromptHints(chatCommands.search(text));
     } else if (!config.disablePromptHint && n < SEARCH_TEXT_LIMIT) {
       // check if need to trigger auto completion
@@ -1490,6 +1491,7 @@ function OriginChat() {
                         setUserInput(getMessageTextContent(message));
                       }}
                       fontSize={fontSize}
+                      fontFamily={fontFamily}
                       parentRef={scrollRef}
                       defaultShow={i >= messages.length - 6}
                     />
@@ -1584,6 +1586,7 @@ function OriginChat() {
             autoFocus={autoFocus}
             style={{
               fontSize: config.fontSize,
+              fontFamily: config.fontFamily,
             }}
           />
           {attachImages.length != 0 && (
