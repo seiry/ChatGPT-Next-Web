@@ -19,9 +19,10 @@ if ('serviceWorker' in navigator) {
     }, function (err) {
       console.error('ServiceWorker registration failed: ', err);
     });
-    navigator.serviceWorker.addEventListener('controllerchange', function() {
-      alert('ServiceWorker controllerchange ');
-      window.location.reload(true);
-    });
+    // will cause bug on ios 15.4 safari
+    // navigator.serviceWorker.addEventListener('controllerchange', function() {
+    //   alert('ServiceWorker controllerchange ');
+    //   window.location.reload(true);
+    // });
   });
 }
