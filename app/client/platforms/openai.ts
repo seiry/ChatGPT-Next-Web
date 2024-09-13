@@ -46,6 +46,7 @@ import {
   getMessageImages,
   isVisionModel,
   isDalle3 as _isDalle3,
+  isO1 as _isO1,
 } from "@/app/utils";
 
 export interface OpenAIListModelResponse {
@@ -160,6 +161,8 @@ export class ChatGPTApi implements LLMApi {
     let requestPayload: RequestPayload | DalleRequestPayload;
 
     const isDalle3 = _isDalle3(options.config.model);
+    const isO1 = _isO1(options.config.model);
+    const forceNoStream = isO1;
     if (isDalle3) {
       const prompt = getMessageTextContent(
         options.messages.slice(-1)?.pop() as any,
@@ -186,7 +189,7 @@ export class ChatGPTApi implements LLMApi {
 
       requestPayload = {
         messages,
-        stream: options.config.stream,
+        stream: forceNoStream ? false : options.config.stream,
         model: modelConfig.model,
         temperature: modelConfig.temperature,
         presence_penalty: modelConfig.presence_penalty,

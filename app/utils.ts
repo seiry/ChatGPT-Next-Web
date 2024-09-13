@@ -274,6 +274,9 @@ export function isDalle3(model: string) {
   return "dall-e-3" === model;
 }
 
+export function isO1(model: string) {
+  return model.includes("o1-");
+}
 export function showPlugins(provider: ServiceProvider, model: string) {
   if (
     provider == ServiceProvider.OpenAI ||
