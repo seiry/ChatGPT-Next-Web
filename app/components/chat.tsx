@@ -28,6 +28,7 @@ import DeleteIcon from "../icons/clear.svg";
 import PinIcon from "../icons/pin.svg";
 import EditIcon from "../icons/rename.svg";
 import ConfirmIcon from "../icons/confirm.svg";
+import CloseIcon from "../icons/close.svg";
 import CancelIcon from "../icons/cancel.svg";
 import ImageIcon from "../icons/image.svg";
 
@@ -37,7 +38,11 @@ import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
 import RobotIcon from "../icons/robot.svg";
+import SizeIcon from "../icons/size.svg";
+import QualityIcon from "../icons/hd.svg";
+import StyleIcon from "../icons/palette.svg";
 import PluginIcon from "../icons/plugin.svg";
+import ShortcutkeyIcon from "../icons/shortcutkey.svg";
 
 import {
   ChatMessage,
@@ -50,6 +55,7 @@ import {
   useAppConfig,
   DEFAULT_TOPIC,
   ModelType,
+  usePluginStore,
 } from "../store";
 
 import {
@@ -60,6 +66,9 @@ import {
   getMessageTextContent,
   getMessageImages,
   isVisionModel,
+  isDalle3,
+  showPlugins,
+  safeLocalStorage,
 } from "../utils";
 
 import { compressImage, uploadImage as uploadImageRemote } from "@/app/utils/chat";
@@ -67,6 +76,7 @@ import { compressImage, uploadImage as uploadImageRemote } from "@/app/utils/cha
 import dynamic from "next/dynamic";
 
 import { ChatControllerPool } from "../client/controller";
+import { DalleSize, DalleQuality, DalleStyle } from "../typing";
 import { Prompt, usePromptStore } from "../store/prompt";
 import Locale from "../locales";
 
@@ -90,7 +100,6 @@ import {
   REQUEST_TIMEOUT_MS,
   UNFINISHED_INPUT,
   ServiceProvider,
-  Plugin,
 } from "../constant";
 import { Avatar } from "./emoji";
 import { ContextPrompts, MaskAvatar, MaskConfig } from "./mask";
@@ -101,6 +110,8 @@ import { ExportMessageModal } from "./exporter";
 import { getClientConfig } from "../config/client";
 import { useAllModels } from "../utils/hooks";
 import { MultimodalContent } from "../client/api";
+
+const localStorage = safeLocalStorage();
 
 const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
@@ -181,7 +192,7 @@ function PromptToast(props: {
 
   return (
     <div className={styles["prompt-toast"]} key="prompt-toast">
-      {props.showToast && (
+      {props.showToast && context.length > 0 && (
         <div
           className={styles["prompt-toast-inner"] + " clickable"}
           role="button"
@@ -430,10 +441,12 @@ export function ChatActions(props: {
   showPromptHints: () => void;
   hitBottom: boolean;
   uploading: boolean;
+  setShowShortcutKeyModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const config = useAppConfig();
   const navigate = useNavigate();
   const chatStore = useChatStore();
+  const pluginStore = usePluginStore();
 
   // switch themes
   const theme = config.theme;
@@ -480,6 +493,19 @@ export function ChatActions(props: {
   const [showModelSelector, setShowModelSelector] = useState(false);
   const [showPluginSelector, setShowPluginSelector] = useState(false);
   const [showUploadImage, setShowUploadImage] = useState(false);
+
+  const [showSizeSelector, setShowSizeSelector] = useState(false);
+  const [showQualitySelector, setShowQualitySelector] = useState(false);
+  const [showStyleSelector, setShowStyleSelector] = useState(false);
+  const dalle3Sizes: DalleSize[] = ["1024x1024", "1792x1024", "1024x1792"];
+  const dalle3Qualitys: DalleQuality[] = ["standard", "hd"];
+  const dalle3Styles: DalleStyle[] = ["vivid", "natural"];
+  const currentSize =
+    chatStore.currentSession().mask.modelConfig?.size ?? "1024x1024";
+  const currentQuality =
+    chatStore.currentSession().mask.modelConfig?.quality ?? "standard";
+  const currentStyle =
+    chatStore.currentSession().mask.modelConfig?.style ?? "vivid";
 
   useEffect(() => {
     const show = isVisionModel(currentModel);
@@ -624,33 +650,122 @@ export function ChatActions(props: {
         />
       )}
 
-      <ChatAction
-        onClick={() => setShowPluginSelector(true)}
-        text={Locale.Plugin.Name}
-        icon={<PluginIcon />}
-      />
+      {isDalle3(currentModel) && (
+        <ChatAction
+          onClick={() => setShowSizeSelector(true)}
+          text={currentSize}
+          icon={<SizeIcon />}
+        />
+      )}
+
+      {showSizeSelector && (
+        <Selector
+          defaultSelectedValue={currentSize}
+          items={dalle3Sizes.map((m) => ({
+            title: m,
+            value: m,
+          }))}
+          onClose={() => setShowSizeSelector(false)}
+          onSelection={(s) => {
+            if (s.length === 0) return;
+            const size = s[0];
+            chatStore.updateCurrentSession((session) => {
+              session.mask.modelConfig.size = size;
+            });
+            showToast(size);
+          }}
+        />
+      )}
+
+      {isDalle3(currentModel) && (
+        <ChatAction
+          onClick={() => setShowQualitySelector(true)}
+          text={currentQuality}
+          icon={<QualityIcon />}
+        />
+      )}
+
+      {showQualitySelector && (
+        <Selector
+          defaultSelectedValue={currentQuality}
+          items={dalle3Qualitys.map((m) => ({
+            title: m,
+            value: m,
+          }))}
+          onClose={() => setShowQualitySelector(false)}
+          onSelection={(q) => {
+            if (q.length === 0) return;
+            const quality = q[0];
+            chatStore.updateCurrentSession((session) => {
+              session.mask.modelConfig.quality = quality;
+            });
+            showToast(quality);
+          }}
+        />
+      )}
+
+      {isDalle3(currentModel) && (
+        <ChatAction
+          onClick={() => setShowStyleSelector(true)}
+          text={currentStyle}
+          icon={<StyleIcon />}
+        />
+      )}
+
+      {showStyleSelector && (
+        <Selector
+          defaultSelectedValue={currentStyle}
+          items={dalle3Styles.map((m) => ({
+            title: m,
+            value: m,
+          }))}
+          onClose={() => setShowStyleSelector(false)}
+          onSelection={(s) => {
+            if (s.length === 0) return;
+            const style = s[0];
+            chatStore.updateCurrentSession((session) => {
+              session.mask.modelConfig.style = style;
+            });
+            showToast(style);
+          }}
+        />
+      )}
+
+      {showPlugins(currentProviderName, currentModel) && (
+        <ChatAction
+          onClick={() => {
+            if (pluginStore.getAll().length == 0) {
+              navigate(Path.Plugins);
+            } else {
+              setShowPluginSelector(true);
+            }
+          }}
+          text={Locale.Plugin.Name}
+          icon={<PluginIcon />}
+        />
+      )}
       {showPluginSelector && (
         <Selector
           multiple
           defaultSelectedValue={chatStore.currentSession().mask?.plugin}
-          items={[
-            {
-              title: Locale.Plugin.Artifacts,
-              value: Plugin.Artifacts,
-            },
-          ]}
+          items={pluginStore.getAll().map((item) => ({
+            title: `${item?.title}@${item?.version}`,
+            value: item?.id,
+          }))}
           onClose={() => setShowPluginSelector(false)}
           onSelection={(s) => {
-            const plugin = s[0];
             chatStore.updateCurrentSession((session) => {
-              session.mask.plugin = s;
+              session.mask.plugin = s as string[];
             });
-            if (plugin) {
-              showToast(plugin);
-            }
           }}
         />
       )}
+
+      <ChatAction
+        onClick={() => props.setShowShortcutKeyModal(true)}
+        text={Locale.Chat.ShortcutKey.Title}
+        icon={<ShortcutkeyIcon />}
+      />
     </div>
   );
 }
@@ -721,6 +836,67 @@ export function DeleteImageButton(props: { deleteImage: () => void }) {
   return (
     <div className={styles["delete-image"]} onClick={props.deleteImage}>
       <DeleteIcon />
+    </div>
+  );
+}
+
+export function ShortcutKeyModal(props: { onClose: () => void }) {
+  const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+  const shortcuts = [
+    {
+      title: Locale.Chat.ShortcutKey.newChat,
+      keys: isMac ? ["⌘", "Shift", "O"] : ["Ctrl", "Shift", "O"],
+    },
+    { title: Locale.Chat.ShortcutKey.focusInput, keys: ["Shift", "Esc"] },
+    {
+      title: Locale.Chat.ShortcutKey.copyLastCode,
+      keys: isMac ? ["⌘", "Shift", ";"] : ["Ctrl", "Shift", ";"],
+    },
+    {
+      title: Locale.Chat.ShortcutKey.copyLastMessage,
+      keys: isMac ? ["⌘", "Shift", "C"] : ["Ctrl", "Shift", "C"],
+    },
+    {
+      title: Locale.Chat.ShortcutKey.showShortcutKey,
+      keys: isMac ? ["⌘", "/"] : ["Ctrl", "/"],
+    },
+  ];
+  return (
+    <div className="modal-mask">
+      <Modal
+        title={Locale.Chat.ShortcutKey.Title}
+        onClose={props.onClose}
+        actions={[
+          <IconButton
+            type="primary"
+            text={Locale.UI.Confirm}
+            icon={<ConfirmIcon />}
+            key="ok"
+            onClick={() => {
+              props.onClose();
+            }}
+          />,
+        ]}
+      >
+        <div className={styles["shortcut-key-container"]}>
+          <div className={styles["shortcut-key-grid"]}>
+            {shortcuts.map((shortcut, index) => (
+              <div key={index} className={styles["shortcut-key-item"]}>
+                <div className={styles["shortcut-key-title"]}>
+                  {shortcut.title}
+                </div>
+                <div className={styles["shortcut-key-keys"]}>
+                  {shortcut.keys.map((key, i) => (
+                    <div key={i} className={styles["shortcut-key"]}>
+                      <span>{key}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
@@ -837,7 +1013,7 @@ function OriginChat() {
       .onUserInput(userInput, attachImages)
       .then(() => setIsLoading(false));
     setAttachImages([]);
-    localStorage.setItem(LAST_INPUT_KEY, userInput);
+    chatStore.setLastInput(userInput);
     setUserInput("");
     setPromptHints([]);
     if (!isMobileScreen) inputRef.current?.focus();
@@ -903,7 +1079,7 @@ function OriginChat() {
       userInput.length <= 0 &&
       !(e.metaKey || e.altKey || e.ctrlKey)
     ) {
-      setUserInput(localStorage.getItem(LAST_INPUT_KEY) ?? "");
+      setUserInput(chatStore.lastInput ?? "");
       e.preventDefault();
       return;
     }
@@ -1277,6 +1453,70 @@ function OriginChat() {
     setAttachImages(images);
   }
 
+  // 快捷键 shortcut keys
+  const [showShortcutKeyModal, setShowShortcutKeyModal] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      // 打开新聊天 command + shift + o
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        event.shiftKey &&
+        event.key.toLowerCase() === "o"
+      ) {
+        event.preventDefault();
+        setTimeout(() => {
+          chatStore.newSession();
+          navigate(Path.Chat);
+        }, 10);
+      }
+      // 聚焦聊天输入 shift + esc
+      else if (event.shiftKey && event.key.toLowerCase() === "escape") {
+        event.preventDefault();
+        inputRef.current?.focus();
+      }
+      // 复制最后一个代码块 command + shift + ;
+      else if (
+        (event.metaKey || event.ctrlKey) &&
+        event.shiftKey &&
+        event.code === "Semicolon"
+      ) {
+        event.preventDefault();
+        const copyCodeButton =
+          document.querySelectorAll<HTMLElement>(".copy-code-button");
+        if (copyCodeButton.length > 0) {
+          copyCodeButton[copyCodeButton.length - 1].click();
+        }
+      }
+      // 复制最后一个回复 command + shift + c
+      else if (
+        (event.metaKey || event.ctrlKey) &&
+        event.shiftKey &&
+        event.key.toLowerCase() === "c"
+      ) {
+        event.preventDefault();
+        const lastNonUserMessage = messages
+          .filter((message) => message.role !== "user")
+          .pop();
+        if (lastNonUserMessage) {
+          const lastMessageContent = getMessageTextContent(lastNonUserMessage);
+          copyToClipboard(lastMessageContent);
+        }
+      }
+      // 展示快捷键 command + /
+      else if ((event.metaKey || event.ctrlKey) && event.key === "/") {
+        event.preventDefault();
+        setShowShortcutKeyModal(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [messages, chatStore, navigate]);
+
   return (
     <div className={styles.chat} key={session.id}>
       <div className="window-header" data-tauri-drag-region>
@@ -1310,6 +1550,8 @@ function OriginChat() {
               <IconButton
                 icon={<RenameIcon />}
                 bordered
+                title={Locale.Chat.EditMessage.Title}
+                aria={Locale.Chat.EditMessage.Title}
                 onClick={() => setIsEditingMessage(true)}
               />
             </div>
@@ -1329,6 +1571,8 @@ function OriginChat() {
               <IconButton
                 icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
                 bordered
+                title={Locale.Chat.Actions.FullScreen}
+                aria={Locale.Chat.Actions.FullScreen}
                 onClick={() => {
                   config.update(
                     (config) => (config.tightBorder = !config.tightBorder),
@@ -1380,6 +1624,7 @@ function OriginChat() {
                       <div className={styles["chat-message-edit"]}>
                         <IconButton
                           icon={<EditIcon />}
+                          aria={Locale.Chat.Actions.Edit}
                           onClick={async () => {
                             const newMessage = await showPrompt(
                               Locale.Chat.Actions.Edit,
@@ -1428,6 +1673,11 @@ function OriginChat() {
                         </>
                       )}
                     </div>
+                    {!isUser && (
+                      <div className={styles["chat-model-name"]}>
+                        {message.model}
+                      </div>
+                    )}
 
                     {showActions && (
                       <div className={styles["chat-message-actions"]}>
@@ -1472,20 +1722,41 @@ function OriginChat() {
                       </div>
                     )}
                   </div>
-                  {showTyping && (
+                  {message?.tools?.length == 0 && showTyping && (
                     <div className={styles["chat-message-status"]}>
                       {Locale.Chat.Typing}
                     </div>
                   )}
+                  {/*@ts-ignore*/}
+                  {message?.tools?.length > 0 && (
+                    <div className={styles["chat-message-tools"]}>
+                      {message?.tools?.map((tool) => (
+                        <div
+                          key={tool.id}
+                          className={styles["chat-message-tool"]}
+                        >
+                          {tool.isError === false ? (
+                            <ConfirmIcon />
+                          ) : tool.isError === true ? (
+                            <CloseIcon />
+                          ) : (
+                            <LoadingButtonIcon />
+                          )}
+                          <span>{tool?.function?.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div className={styles["chat-message-item"]}>
                     <Markdown
+                      key={message.streaming ? "loading" : "done"}
                       content={getMessageTextContent(message)}
                       loading={
                         (message.preview || message.streaming) &&
                         message.content.length === 0 &&
                         !isUser
                       }
-                      onContextMenu={(e) => onRightClick(e, message)}
+                      //   onContextMenu={(e) => onRightClick(e, message)} // hard to use
                       onDoubleClickCapture={() => {
                         if (!isMobileScreen) return;
                         setUserInput(getMessageTextContent(message));
@@ -1562,6 +1833,7 @@ function OriginChat() {
             setUserInput("/");
             onSearch("");
           }}
+          setShowShortcutKeyModal={setShowShortcutKeyModal}
         />
         <label
           className={`${styles["chat-input-panel-inner"]} ${
@@ -1632,6 +1904,10 @@ function OriginChat() {
             setIsEditingMessage(false);
           }}
         />
+      )}
+
+      {showShortcutKeyModal && (
+        <ShortcutKeyModal onClose={() => setShowShortcutKeyModal(false)} />
       )}
     </div>
   );

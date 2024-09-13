@@ -3,8 +3,8 @@ import { getServerSideConfig } from "@/app/config/server";
 import { ModelProvider, OpenaiPath } from "@/app/constant";
 import { prettyObject } from "@/app/utils/format";
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "../../auth";
-import { requestOpenai } from "../../common";
+import { auth } from "./auth";
+import { requestOpenai } from "./common";
 
 const ALLOWD_PATH = new Set(Object.values(OpenaiPath));
 
@@ -13,14 +13,16 @@ function getModels(remoteModelRes: OpenAIListModelResponse) {
 
   if (config.disableGPT4) {
     remoteModelRes.data = remoteModelRes.data.filter(
-      (m) => !m.id.startsWith("gpt-4"),
+      (m) =>
+        !(m.id.startsWith("gpt-4") || m.id.startsWith("chatgpt-4o")) ||
+        m.id.startsWith("gpt-4o-mini"),
     );
   }
 
   return remoteModelRes;
 }
 
-async function handle(
+export async function handle(
   req: NextRequest,
   { params }: { params: { path: string[] } },
 ) {
