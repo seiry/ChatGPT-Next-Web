@@ -17,6 +17,7 @@ import { ErrorBoundary } from "./error";
 
 import { getISOLang, getLang } from "../locales";
 
+import clsx from "clsx";
 import {
   Route,
   HashRouter as Router,
@@ -33,7 +34,7 @@ import { SideBar } from "./sidebar";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
-    <div className={styles["loading-content"] + " no-dark"}>
+    <div className={clsx("no-dark", styles["loading-content"])}>
       {!props.noLogo && <BotIcon />}
       <LoadingIcon />
     </div>
@@ -181,7 +182,11 @@ function Screen() {
     if (isSdNew) return <Sd />;
     return (
       <>
-        <SideBar className={isHome ? styles["sidebar-show"] : ""} />
+        <SideBar
+          className={clsx({
+            [styles["sidebar-show"]]: isHome,
+          })}
+        />
         <WindowContent>
           <Routes>
             <Route path={Path.Home} element={<Chat />} />
@@ -199,9 +204,10 @@ function Screen() {
 
   return (
     <div
-      className={`${styles.container} ${
-        shouldTightBorder ? styles["tight-container"] : styles.container
-      } ${getLang() === "ar" ? styles["rtl-screen"] : ""}`}
+      className={clsx(styles.container, {
+        [styles["tight-container"]]: shouldTightBorder,
+        [styles["rtl-screen"]]: getLang() === "ar",
+      })}
     >
       {renderContent()}
     </div>
