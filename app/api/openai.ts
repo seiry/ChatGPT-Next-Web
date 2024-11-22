@@ -78,12 +78,8 @@ export const POST = handle;
 
 export const runtime = "edge";
 export const preferredRegion = [
-  "cle1",
-  "hnd1",
   "iad1",
-  "icn1",
-  "kix1",
-  "pdx1",
   "sfo1",
   "sin1",
+  "syd1"
 ];
