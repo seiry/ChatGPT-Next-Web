@@ -26,11 +26,12 @@ import {
   REPO_URL,
 } from "../constant";
 
+import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { Link, useNavigate } from "react-router-dom";
 import { gotoLogin } from "../client/auth";
 import { isIOS, useMobileScreen } from "../utils";
-import { Selector, showConfirm, showToast } from "./ui-lib";
+import { Selector, showConfirm } from "./ui-lib";
 
 const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
   loading: () => null,
@@ -142,9 +143,9 @@ export function SideBarContainer(props: {
   const { children, className, onDragStart, shouldNarrow } = props;
   return (
     <div
-      className={`${styles.sidebar} ${className} ${
-        shouldNarrow && styles["narrow-sidebar"]
-      }`}
+      className={clsx(styles.sidebar, className, {
+        [styles["narrow-sidebar"]]: shouldNarrow,
+      })}
       style={{
         // #3016 disable transition on ios mobile screen
         transition: isMobileScreen && isIOSMobile ? "none" : undefined,
@@ -166,11 +167,17 @@ export function SideBarHeader(props: {
   subTitle?: string | React.ReactNode;
   logo?: React.ReactNode;
   children?: React.ReactNode;
+  shouldNarrow?: boolean;
 }) {
-  const { title, subTitle, logo, children } = props;
+  const { title, subTitle, logo, children, shouldNarrow } = props;
   return (
     <Fragment>
-      <div className={styles["sidebar-header"]} data-tauri-drag-region>
+      <div
+        className={clsx(styles["sidebar-header"], {
+          [styles["sidebar-header-narrow"]]: shouldNarrow,
+        })}
+        data-tauri-drag-region
+      >
         <div className={styles["sidebar-title-container"]}>
           <div className={styles["sidebar-title"]} data-tauri-drag-region>
             {title}
@@ -179,7 +186,7 @@ export function SideBarHeader(props: {
           click to trigger login
         </div>
         </div>
-        <div className={styles["sidebar-logo"] + " no-dark"}>{logo}</div>
+        <div className={clsx(styles["sidebar-logo"], "no-dark")}>{logo}</div>
       </div>
       {children}
     </Fragment>
@@ -230,6 +237,7 @@ export function SideBar(props: { className?: string }) {
         title="NextChat"
         subTitle="Build your own AI assistant."
         logo={<ChatGptIcon />}
+        shouldNarrow={shouldNarrow}
       >
         <div className={styles["sidebar-header-bar"]}>
           <IconButton
@@ -256,11 +264,6 @@ export function SideBar(props: { className?: string }) {
         {showPluginSelector && (
           <Selector
             items={[
-              {
-                title: "👇 Please select the plugin you need to use",
-                value: "-",
-                disable: true,
-              },
               ...PLUGINS.map((item) => {
                 return {
                   title: item.name,
@@ -287,7 +290,7 @@ export function SideBar(props: { className?: string }) {
       <SideBarTail
         primaryAction={
           <>
-            <div className={styles["sidebar-action"] + " " + styles.mobile}>
+            <div className={clsx(styles["sidebar-action"], styles.mobile)}>
               <IconButton
                 icon={<DeleteIcon />}
                 onClick={async () => {
