@@ -1,3 +1,5 @@
+https://github.com/seiry/ChatGPT-Next-Web/compare/main...ChatGPTNextWeb:NextChat:main
+
 ## for copilot api
 
 https://github.com/aaamoon/copilot-gpt4-service
