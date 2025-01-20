@@ -18,6 +18,7 @@ const DANGER_CONFIG = {
   openaiApiKey: isTransparentMode ? process.env.OPENAI_API_KEY : undefined,
   openaiUrl: process.env.NEXT_PUBLIC_OVERRIDE_OPENAI_FULL_PATH,
   defaultModel: serverConfig.defaultModel,
+  visionModels: serverConfig.visionModels,
 };
 
 declare global {
