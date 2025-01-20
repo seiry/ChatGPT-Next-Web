@@ -53,3 +53,6 @@ dev
 !.yarn/sdks
 !.yarn/versions
 masks.json
+
+# mcp config
+app/mcp/mcp_config.json
