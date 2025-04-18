@@ -508,8 +508,10 @@ const openaiModels = [
   "gpt-4-vision-preview",
   "dall-e-3",
   "o1-mini",
-  "o1-preview",
+  "o1",
+  "o3",
   "o3-mini",
+  "o4-mini",
 ];
 
 export const myStagingModel = "gpt-4.1"
