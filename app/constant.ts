@@ -512,6 +512,12 @@ const openaiModels = [
   "o3-mini",
 ];
 
+export const myStagingModel = "gpt-4.1"
+export const myCompressModel = 'gpt-4.1-mini'
+
+// Max Output Tokens 32,768 - gpt4.1
+export const myMaxTokens = 10_000
+
 const googleModels = [
   "gemini-1.0-pro", // Deprecated on 2/15/2025
   "gemini-1.5-pro-latest",
@@ -853,3 +859,4 @@ export const DEFAULT_GA_ID = "G-89WN60ZK2E";
 
 export const SAAS_CHAT_URL = "https://nextchat.club";
 export const SAAS_CHAT_UTM_URL = "https://nextchat.club?utm=github";
+
