@@ -517,6 +517,8 @@ const openaiModels = [
   "o4-mini",
 ];
 
+export const myOStagingModel = "o4-mini"
+
 export const myStagingModel = "gpt-4.1"
 export const myCompressModel = 'gpt-4.1-mini'
 

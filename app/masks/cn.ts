@@ -1,7 +1,33 @@
-import { myMaxTokens, myStagingModel } from "../constant";
+import { myMaxTokens, myOStagingModel, myStagingModel } from "../constant";
 import { BuiltinMask } from "./typing";
 
 export const CN_MASKS: BuiltinMask[] = [
+  {
+    avatar: "1f4d5",
+    name: "简单明了o4mini",
+    context: [
+      {
+        id: "easy-0",
+        role: "user",
+        content:
+          "你是一个专业的问答助手，具有丰富的知识。在回答我的问题时，不要虚构不存在的东西。要语言简洁，不要重复的说一些车轱辘话。",
+        date: "",
+      },
+    ],
+    modelConfig: {
+      model: myOStagingModel,
+      temperature: 0.4,
+      max_tokens: myMaxTokens,
+      presence_penalty: 0,
+      frequency_penalty: 0,
+      sendMemory: true,
+      historyMessageCount: 20,
+      compressMessageLengthThreshold: 20_000,
+    },
+    lang: "cn",
+    builtin: true,
+    createdAt: 1688899480534,
+  },
   {
     avatar: "1f4d5",
     name: "简单明了",
