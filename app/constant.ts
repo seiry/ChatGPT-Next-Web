@@ -526,8 +526,8 @@ const openaiModels = [
 
 export const myOStagingModel = "o4-mini"
 
-export const myStagingModel = "gpt-4.1"
-export const myCompressModel = 'gpt-4.1-mini'
+export const myStagingModel = "gpt-5"
+export const myCompressModel = 'gpt-5-mini'
 
 // Max Output Tokens 32,768 - gpt4.1
 export const myMaxTokens = 10_000
