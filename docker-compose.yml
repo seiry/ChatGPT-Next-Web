@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - SERVICE_FQDN_CHATNEXT_3000
-      - _APP_URL=$SERVICE_FQDN_CHATNEXT
+      - HOSTNAME="0.0.0.0"
       - OPENAI_API_KEY=$OPENAI_API_KEY
       - GOOGLE_API_KEY=$GOOGLE_API_KEY
       - CODE=$CODE
