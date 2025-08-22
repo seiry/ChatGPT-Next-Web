@@ -1,3 +1,5 @@
+# slogan: chat next
+# port: 3000
 services:
   chatgpt-next-web:
     build:
