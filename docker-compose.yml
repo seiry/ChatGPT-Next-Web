@@ -1,11 +1,13 @@
 # slogan: chat next
 # port: 3000
 services:
-  chatgpt-next-web:
+  chatnext:
     build:
       context: .
       dockerfile: Dockerfile
     environment:
+      - SERVICE_FQDN_CHATNEXT_3000
+      - _APP_URL=$SERVICE_FQDN_CHATNEXT
       - OPENAI_API_KEY=$OPENAI_API_KEY
       - GOOGLE_API_KEY=$GOOGLE_API_KEY
       - CODE=$CODE
@@ -19,7 +21,7 @@ services:
       - TEAM_DOMAIN=$TEAM_DOMAIN
 
     healthcheck:
-      test: "curl -sf http://127.0.0.1:3000/api/config || exit 1"
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"]
       interval: 30s
       timeout: 10s
       retries: 5
