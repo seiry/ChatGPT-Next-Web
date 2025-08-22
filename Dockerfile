@@ -1,4 +1,5 @@
 FROM node:24-alpine AS base
+RUN corepack enable
 
 FROM base AS deps
 
@@ -32,6 +33,8 @@ ENV OPENAI_API_KEY=""
 ENV GOOGLE_API_KEY=""
 ENV CODE=""
 ENV ENABLE_MCP=""
+
+RUN apk update && apk add --no-cache curl
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
