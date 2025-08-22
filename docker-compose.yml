@@ -19,3 +19,9 @@ services:
       - DISABLE_FAST_LINK=$DISABLE_FAST_LINK
       - OPENAI_SB=$OPENAI_SB
 
+    healthcheck:
+      test: "curl -sf http://127.0.0.1:3000/api/config || exit 1"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
